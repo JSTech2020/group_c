@@ -3,8 +3,8 @@ import './AnswerCircles.css';
 import CorrectAnswerCircle from './CorrectAnswerCircle';
 
 function AnswerCircles({ answersCorrect }) {
-  const answers = answersCorrect.map((correct) => {
-    return (<CorrectAnswerCircle correct={correct}></CorrectAnswerCircle>);
+  const answers = answersCorrect.map((correct, index) => {
+    return (<CorrectAnswerCircle key={index} correct={correct}></CorrectAnswerCircle>);
   });
 
   return (
