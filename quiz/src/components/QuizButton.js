@@ -1,10 +1,10 @@
 import React from 'react';
 import "./QuizButton.css";
 
-function QuizButton(props) {
+function QuizButton({ text, onClick }) {
   return (
-    <button className="quiz-button">
-      {props.text}
+    <button className="quiz-button" onClick={onClick}>
+      {text}
     </button>
   );
 }

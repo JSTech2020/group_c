@@ -2,13 +2,13 @@ import React from 'react';
 import QuizButton from './QuizButton';
 import './AnswerButtons.css';
 
-function AnswerButtons() {
-  const answers = ["answer1", "answer2", "answer3", "answer4"];
+function AnswerButtons({ answers, onClick }) {
 
-  const buttons = answers.map(answer =>
+  const buttons = answers.map((answer, index) =>
     <QuizButton
-      key={answer}
+      key={index}
       text={answer}
+      onClick={() => onClick(index)}
     ></QuizButton>
   );
 

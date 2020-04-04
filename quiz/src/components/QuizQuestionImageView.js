@@ -2,12 +2,16 @@ import React from 'react';
 import QuizQuestionView from './QuizQuestionView';
 import './QuizQuestionImageView.css';
 
-import imgDemo from './../images/nature.jpg'; // import demo
-
-function QuizQuestionImageView() {
+function QuizQuestionImageView({ question, questionCount, questionIndex, onClick }) {
+  const imageSrc = `./../images/${question.image}`;
   return (
-    <QuizQuestionView>
-      <img src={imgDemo} alt="Demo"></img>
+    <QuizQuestionView
+      question={question}
+      questionCount={questionCount}
+      questionIndex={questionIndex}
+      onClick={onClick}
+    >
+      <img src={imageSrc} alt="Demo"></img>
     </QuizQuestionView>
   );
 }
