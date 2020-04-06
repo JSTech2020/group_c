@@ -1,5 +1,6 @@
 export const mockDataQuestions = [
   {
+    id: 1,
     question: "What is the answer to this question? (hint: answer 1)",
     answers: [
       "Answer 1",
@@ -8,9 +9,10 @@ export const mockDataQuestions = [
       "Answer 4",
     ],
     correctAnswer: 0,
-    userAnswered: null,
+    difficulty: 0,
   },
   {
+    id: 3,
     question: "What is the color of the sun?",
     answers: [
       "green",
@@ -19,9 +21,10 @@ export const mockDataQuestions = [
       "black",
     ],
     correctAnswer: 2,
-    userAnswered: null,
+    difficulty: 0,
   },
   {
+    id: 5,
     question: "How cool is this quiz?",
     answers: [
       "Cool",
@@ -30,9 +33,10 @@ export const mockDataQuestions = [
       "The coolest",
     ],
     correctAnswer: 3,
-    userAnswered: null,
+    difficulty: 0,
   },
   {
+    id: 8,
     question: "Who wrote War and Peace?",
     answers: [
       "Oscar Wilde",
@@ -41,9 +45,10 @@ export const mockDataQuestions = [
       "William Shakespeare",
     ],
     correctAnswer: 1,
-    userAnswered: null,
+    difficulty: 2,
   },
   {
+    id: 10,
     question: "...?",
     answers: [
       "Correct!",
@@ -52,9 +57,10 @@ export const mockDataQuestions = [
       "...",
     ],
     correctAnswer: 0,
-    userAnswered: null,
+    difficulty: 1,
   },
   {
+    id: 11,
     question: "What is on this picture?",
     image: 'nature.jpg',
     answers: [
@@ -64,9 +70,10 @@ export const mockDataQuestions = [
       "Nature",
     ],
     correctAnswer: 3,
-    userAnswered: null,
+    difficulty: 2,
   },
   {
+    id: 15,
     question: "Is this the last question?",
     answers: [
       "No",
@@ -75,6 +82,6 @@ export const mockDataQuestions = [
       "No",
     ],
     correctAnswer: 2,
-    userAnswered: null,
+    difficulty: 1,
   },
 ];
