@@ -1,0 +1,19 @@
+import React from 'react';
+import QuizQuestionView from './QuizQuestionView';
+import './QuizQuestionImageView.css';
+
+function QuizQuestionImageView({ question, questionCount, questionIndex, onClick }) {
+  const imageSrc = `./../images/${question.image}`;
+  return (
+    <QuizQuestionView
+      question={question}
+      questionCount={questionCount}
+      questionIndex={questionIndex}
+      onClick={onClick}
+    >
+      <img src={imageSrc} alt="Demo"></img>
+    </QuizQuestionView>
+  );
+}
+
+export default QuizQuestionImageView;

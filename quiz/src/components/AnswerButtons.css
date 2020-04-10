@@ -1,0 +1,11 @@
+.answer-buttons .quiz-button {
+  margin: 8px 0px;
+}
+
+.answer-buttons :first-child {
+  margin-top: 0px;
+}
+
+.answer-buttons :last-child {
+  margin-bottom: 0px;
+}
