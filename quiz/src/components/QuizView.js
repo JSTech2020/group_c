@@ -42,7 +42,7 @@ function QuizView() {
     ></QuizFinishView>
   );
   return (
-    <div className="quiz-view">
+    <div className="quiz-view whole-page">
       {/* { gameFinishView } */}
       { gameIsRunning ? gameView : gameFinishView }
     </div>

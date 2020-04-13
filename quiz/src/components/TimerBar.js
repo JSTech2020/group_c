@@ -5,7 +5,7 @@ function TimerBar({ fullTime, resetTimer, resetTimerCallback, timeOutCallback })
   const [ time, setTime ] = useState(fullTime);
 
 
-  const fullHeight = 400; // The bar is 400px high - TODO; Use refs?
+  const fullHeight = 550; // The bar is 400px high - TODO; Use refs?
   const height = Math.floor(time / fullTime * fullHeight);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function TimerBar({ fullTime, resetTimer, resetTimerCallback, timeOutCallback })
   return (
     <div className="timer-bar">
       <div className="under-bar">
-        <div className="bar-text">{ time }s</div>
+        <div className="bar-text">{ time }</div>
         <div className={"over-bar " + runningOut } style={{height: height + 'px'}}></div>
       </div>
     </div>

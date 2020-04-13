@@ -1,5 +1,10 @@
+.answer-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
 .answer-buttons .quiz-button {
-  margin: 8px 0px;
+  margin: 4px 0px;
 }
 
 .answer-buttons :first-child {
