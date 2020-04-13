@@ -2,7 +2,7 @@ import React from 'react';
 import AnswerButtons from './AnswerButtons';
 import "./QuizQuestionView.css";
 
-function QuizQuestionView({ question, questionCount, questionIndex, children, onClick }) {
+function QuizQuestionView({ question, questionCount, questionIndex, resultAnswer, children, onClick }) {
   return (
     <div className="quiz-question-view">
       <div className="quiz-question-content">
@@ -18,7 +18,12 @@ function QuizQuestionView({ question, questionCount, questionIndex, children, on
           {children}
         </div>
         <div className="answer-buttons-area">
-          <AnswerButtons onClick={onClick} answers={question.answers}></AnswerButtons>
+          <AnswerButtons
+            onClick={onClick}
+            answers={question.answers}
+            resultAnswer={resultAnswer}
+            answerButtonOrder={question.answerButtonOrder}
+          ></AnswerButtons>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import QuizQuestionView from './QuizQuestionView';
 import './QuizQuestionImageView.css';
 
-function QuizQuestionImageView({ question, questionCount, questionIndex, onClick }) {
+function QuizQuestionImageView({ question, questionCount, questionIndex, resultAnswer, onClick }) {
   const imageSrc = `./../images/${question.image}`;
   return (
     <QuizQuestionView
@@ -10,6 +10,7 @@ function QuizQuestionImageView({ question, questionCount, questionIndex, onClick
       questionCount={questionCount}
       questionIndex={questionIndex}
       onClick={onClick}
+      resultAnswer={resultAnswer}
     >
       <img src={imageSrc} alt="Demo"></img>
     </QuizQuestionView>

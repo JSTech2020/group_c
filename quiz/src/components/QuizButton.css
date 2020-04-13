@@ -9,3 +9,15 @@
   padding: 8px;
   display: block;
 }
+
+.quiz-button.correct {
+  background-color: green;
+  border-color: green;
+  color: white;
+}
+
+.quiz-button.wrong {
+  background-color: rgb(190, 0, 0);
+  border-color: rgb(190, 0, 0);
+  color: white;
+}

@@ -15,7 +15,8 @@
 
 .timer-bar .over-bar {
   background-color: #f38f1f;
-  /* height: 400px; Controlled via style property */
+  /* height: 550px; Controlled via style property */
+  transition: height 1s linear;
   width: 100%;
   border-radius: 5px;
   position: absolute;
@@ -25,7 +26,12 @@
 }
 
 .timer-bar .over-bar.running-out {
-  background-color: rgb(190, 0, 0);
+  animation: blinkingBar 0.5s linear infinite alternate;
+}
+
+@keyframes blinkingBar {
+  from { background-color: #f38f1f; }
+  to { background-color: rgb(190, 0, 0); }
 }
 
 .timer-bar .bar-text {

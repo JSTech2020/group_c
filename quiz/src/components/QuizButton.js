@@ -1,9 +1,9 @@
 import React from 'react';
 import "./QuizButton.css";
 
-function QuizButton({ text, onClick }) {
+function QuizButton({ text, resultClass, onClick }) {
   return (
-    <button className="quiz-button" onClick={onClick}>
+    <button className={`quiz-button ${resultClass}`} onClick={onClick}>
       {text}
     </button>
   );
