@@ -5,7 +5,6 @@ import QuizGameView from './QuizGameView';
 import QuizFinishView from './QuizFinishView';
 
 function questionsShuffleAnswers(questions) {
-  console.log('recalled!');
   return questions.map((question) => {
     const arr = [0, 1, 2, 3];
     arr.sort(() => .5 - Math.random());
@@ -58,7 +57,6 @@ function QuizView() {
   );
   return (
     <div className="quiz-view whole-page">
-      {/* { gameFinishView } */}
       { gameIsRunning ? gameView : gameFinishView }
     </div>
   );

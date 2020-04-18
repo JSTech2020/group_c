@@ -14,9 +14,7 @@ function TimerBar({ fullTime, resetTimer, resetTimerCallback, timeOutCallback, a
       const timerId = setInterval(() => {
         const newTime = Math.max(time - 1, -1);
         if (newTime === -1) {
-          // setTimeout(() => {
-            timeOutCallback();
-          // }, 1000);
+          timeOutCallback();
           clearInterval(timerId);
         }
         setTime(newTime);
