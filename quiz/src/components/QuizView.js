@@ -4,8 +4,22 @@ import { mockDataQuestions } from "./../mockDataQuestions";
 import QuizGameView from './QuizGameView';
 import QuizFinishView from './QuizFinishView';
 
+function questionsShuffleAnswers(questions) {
+  return questions.map((question) => {
+    const arr = [0, 1, 2, 3];
+    arr.sort(() => .5 - Math.random());
+
+    return {
+      ...question,
+      answerButtonOrder: arr,
+    }
+  });
+}
+
+const shuffledMockQuestions = questionsShuffleAnswers(mockDataQuestions);
+
 function QuizView() {
-  const questions = mockDataQuestions;
+  const questions = shuffledMockQuestions;
   const [userAnswers, setUserAnswers] = useState(questions.map(() => null));
 
   const userAnswerClick = (answerNumber, questionIndex) => {
@@ -42,8 +56,7 @@ function QuizView() {
     ></QuizFinishView>
   );
   return (
-    <div className="quiz-view">
-      {/* { gameFinishView } */}
+    <div className="quiz-view whole-page">
       { gameIsRunning ? gameView : gameFinishView }
     </div>
   );

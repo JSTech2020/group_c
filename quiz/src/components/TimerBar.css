@@ -1,7 +1,8 @@
 .timer-bar {
   color: black;
-  height: 400px;
+  height: 550px;
   width: 25px;
+  min-width: 20px;
 }
 
 .timer-bar .under-bar {
@@ -14,7 +15,8 @@
 
 .timer-bar .over-bar {
   background-color: #f38f1f;
-  /* height: 400px; Controlled via style property */
+  /* height: 550px; Controlled via style property */
+  transition: height 1s linear;
   width: 100%;
   border-radius: 5px;
   position: absolute;
@@ -24,14 +26,19 @@
 }
 
 .timer-bar .over-bar.running-out {
-  background-color: rgb(190, 0, 0);
+  animation: blinkingBar 0.5s linear infinite alternate;
+}
+
+@keyframes blinkingBar {
+  from { background-color: #f38f1f; }
+  to { background-color: rgb(190, 0, 0); }
 }
 
 .timer-bar .bar-text {
   position: absolute;
   left: 0px;
   font-size: 14px;
-  top: calc(400px / 2 - 14px / 2);
+  top: calc(500px / 2 - 14px / 2);
   z-index: 2;
   text-align: center;
   width: 100%;

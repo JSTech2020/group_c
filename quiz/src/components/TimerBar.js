@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './TimerBar.css';
 
-function TimerBar({ fullTime, resetTimer, resetTimerCallback, timeOutCallback }) {
-  const [ time, setTime ] = useState(fullTime);
+function TimerBar({ fullTime, resetTimer, resetTimerCallback, timeOutCallback, active }) {
+  const [ time, setTime ] = useState(fullTime - 1);
 
 
-  const fullHeight = 400; // The bar is 400px high - TODO; Use refs?
-  const height = Math.floor(time / fullTime * fullHeight);
+  const fullHeight = 550; // The bar is 400px high - TODO; Use refs?
+  const pixPerTime = fullHeight / (fullTime - 1);
+  const height = Math.floor(time * pixPerTime);
 
   useEffect(() => {
-    if (time > 0) {
+    if (time >= 0 && active) {
       const timerId = setInterval(() => {
-        const newTime = Math.max(time - 1, 0);
-        if (newTime === 0) {
+        const newTime = Math.max(time - 1, -1);
+        if (newTime === -1) {
           timeOutCallback();
+          clearInterval(timerId);
         }
         setTime(newTime);
       }, 1000);
@@ -23,18 +25,18 @@ function TimerBar({ fullTime, resetTimer, resetTimerCallback, timeOutCallback })
 
   useEffect(() => {
     if (resetTimer) {
-      setTime(fullTime);
+      setTime(fullTime - 1);
       resetTimerCallback();
     }
   }, [resetTimer, fullTime, resetTimerCallback]);
 
-  const runningOut = time <= 5 ? 'running-out' : '';
+  const runningOut = time < 5 ? 'running-out' : '';
 
   return (
     <div className="timer-bar">
       <div className="under-bar">
-        <div className="bar-text">{ time }s</div>
-        <div className={"over-bar " + runningOut } style={{height: height + 'px'}}></div>
+        <div className="bar-text">{ time + 1 }</div>
+        <div className={`over-bar ${runningOut}`} style={{height: height + 'px'}}></div>
       </div>
     </div>
   );
