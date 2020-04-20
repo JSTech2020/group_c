@@ -391,7 +391,7 @@ class MemoryGame extends React.Component {
           <Grid item xs={9} sm={9} md={9} xl={9} container className="gameStats" alignItems="stretch"
                 style={{height: this.state.screenHeight}}>
             {/* <Grid item xs={3}><span className="title">Hello Dev</span></Grid> */}
-            <Grid item xs={4} sm={4} md={4} xl={4} spacing={2} justify="space-evenly">
+            <Grid item xs={12} sm={12} md={4} xl={4} spacing={2} justify="space-evenly">
               <Rating
                 style={rating}
                 size="large"
@@ -404,9 +404,9 @@ class MemoryGame extends React.Component {
                 value={this.state.starRating}
               />
             </Grid>
-            <Grid item xs={4} sm={4} md={4} xl={4} className="stat" spacing={2}>{this.state.timer}<span
+            <Grid item xs={6} sm={6} md={4} xl={4} className="stat" spacing={2}>{this.state.timer}<span
               className="stat"> Seconds</span></Grid>
-            <Grid item xs={4} sm={4} md={4} xl={4} className="stat" spacing={2}>{this.state.moves}<span
+            <Grid item xs={6} sm={6} md={4} xl={4} className="stat" spacing={2}>{this.state.moves}<span
               className="stat"> Moves</span></Grid>
           </Grid>
           <Grid item container className="gameTiles" spacing={2} style={{height: this.state.screenHeight / 6 * 4}}>
@@ -415,8 +415,7 @@ class MemoryGame extends React.Component {
             })}
           </Grid>
         </Grid>
-        {this.state.won ? <GameOverScreen onClick={this.restartGame} time={this.state.timer} moves={this.state.moves}
-                                          starRating={this.state.starRating}/> : null}
+        {this.state.won ? <GameOverScreen onClick={this.restartGame} time={this.state.timer} moves={this.state.moves} starRating={this.state.starRating}/> : null}
       </Container>
     );
   }
@@ -468,8 +467,9 @@ function GameOverScreen(props) {
                     <Grid item xs={12} className="title">You Win</Grid>
                     <Grid item xs={6} className="title">{props.time} <span className="stat"> seconds</span></Grid>
                     <Grid item xs={6} className="title">{props.moves} <span className="stat"> moves</span></Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6}  alignItems="center" >
                       <Rating
+                       className="ratingStyle"
                         size="large"
                         name="customized-empty"
                         defaultValue={5}
