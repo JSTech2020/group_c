@@ -344,6 +344,8 @@ class MemoryGame extends React.Component {
 
   componentDidMount() {
     window.addEventListener("resize", this.handleResize);
+
+    console.log(this.state.screenHeight);
   }
 
   componentWillUnmount() {
@@ -409,7 +411,7 @@ class MemoryGame extends React.Component {
             <Grid item xs={6} sm={6} md={4} xl={4} className="stat" spacing={2}>{this.state.moves}<span
               className="stat"> Moves</span></Grid>
           </Grid>
-          <Grid item container className="gameTiles" spacing={2} style={{height: this.state.screenHeight / 6 * 4}}>
+          <Grid item container className="gameTiles" spacing={2} style={{height: this.state.screenHeight/3}}>
             {this.state.memoryCards.map((card) => {
               return <MemoryCard key={card.id}  card={card} onClick={(id) => this.handleClick(id)}/>
             })}
