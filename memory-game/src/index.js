@@ -1,136 +1,121 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-//import Tilt from 'react-tilt';
-
-import Flip from 'react-reveal/Flip';
-// import RubberBand from 'react-reveal/RubberBand';
-import Swing from 'react-reveal/Swing';
-import Pulse from 'react-reveal/Pulse';
-
-import Flash from 'react-reveal/Flash';
-import Jello from 'react-reveal/Jello';
-//import HeadShake from 'react-reveal/HeadShake';
-
-
-import Rating from '@material-ui/lab/Rating';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import Container from '@material-ui/core/Container';
-
-// import { memoryImages } from './images';
-import bgImg from './images/logo.jpg';
-
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import Flip from "react-reveal/Flip";
+import Swing from "react-reveal/Swing";
+import Pulse from "react-reveal/Pulse";
+import Flash from "react-reveal/Flash";
+import Jello from "react-reveal/Jello";
+import Rating from "@material-ui/lab/Rating";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import Container from "@material-ui/core/Container";
+import bgImg from "./images/logo.jpg";
+import "./index.css";
 import CardComponent from "./CardComponent";
-//import { colors } from '@material-ui/core';
-// import { colors } from '@material-ui/core';
 
 const cardStyle = {
-  borderRadius: '8px',
-  boxShadow: '2px 2px 10px grey'
+  borderRadius: "8px",
+  boxShadow: "2px 2px 10px grey",
 };
 
 const rating = {
-  color: '#fc6100'
+  color: "#fc6100",
 };
 
 const expectedJson = [
   {
     id: 1,
     question: "What is the answer to this question? (hint: answer 1)",
-    answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4",],
+    answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
     correctAnswer: 0,
-    difficulty: 0
+    difficulty: 0,
   },
   {
     id: 3,
     question: "What is the color of the sun?",
-    answers: ["green", "blue", "yellow", "black",], correctAnswer: 2,
-    difficulty: 0
-  }
+    answers: ["green", "blue", "yellow", "black"],
+    correctAnswer: 2,
+    difficulty: 0,
+  },
 ];
-
 
 const staticContent = [
   {
     id: 1,
     pairId: 1,
-    text: 'How many legs does a spider have?',
-    isQuestion: true
+    text: "How many legs does a spider have?",
+    isQuestion: true,
   },
   {
     id: 2,
     pairId: 1,
-    text: 'Eight',
-    isQuestion: false
+    text: "Eight",
+    isQuestion: false,
   },
   {
     id: 3,
     pairId: 2,
-    text: 'What is the color of an emerald?',
-    isQuestion: true
+    text: "What is the color of an emerald?",
+    isQuestion: true,
   },
   {
     id: 4,
     pairId: 2,
-    text: 'Green',
-    isQuestion: false
+    text: "Green",
+    isQuestion: false,
   },
   {
     id: 5,
     pairId: 3,
-    text: 'What’s the name of a place you go to see lots of animals?',
-    isQuestion: true
+    text: "What is the color of the sky?",
+    isQuestion: true,
   },
   {
     id: 6,
     pairId: 3,
-    text: 'The zoo',
-    isQuestion: false
+    text: "Blue",
+    isQuestion: false,
   },
   {
     id: 7,
     pairId: 4,
-    text: 'Q4',
-    isQuestion: true
+    text: "Q4",
+    isQuestion: true,
   },
   {
     id: 8,
     pairId: 4,
-    text: 'A4',
-    isQuestion: false
+    text: "A4",
+    isQuestion: false,
   },
   {
     id: 9,
     pairId: 5,
-    text: 'Q5',
-    isQuestion: true
+    text: "Q5",
+    isQuestion: true,
   },
   {
     id: 10,
     pairId: 5,
-    text: 'A5',
-    isQuestion: false
+    text: "A5",
+    isQuestion: false,
   },
   {
     id: 11,
     pairId: 6,
-    text: 'Q6',
-    isQuestion: true
+    text: "Q6",
+    isQuestion: true,
   },
   {
     id: 12,
     pairId: 6,
-    text: 'A6',
-    isQuestion: false
-  }
+    text: "A6",
+    isQuestion: false,
+  },
 ];
-
-// let starRating = 5;
 
 class MemoryGame extends React.Component {
   constructor(props) {
@@ -144,12 +129,12 @@ class MemoryGame extends React.Component {
       moves: 0,
       won: false,
       starRating: 0,
-      pageLoad: true
+      pageLoad: true,
     };
     this.handleResize = this.handleResize.bind(this);
   }
 
-  handleClick = id => {
+  handleClick = (id) => {
     let newMemoryCards = this.state.memoryCards.slice();
     let newMoves = this.state.moves;
     let clickedCard = newMemoryCards.find((card) => {
@@ -165,65 +150,51 @@ class MemoryGame extends React.Component {
     } else if (currentOpenCards === 1) {
       newMoves++;
       currentOpenCards = 2;
-      this.checkMatch(clickedCard, this.state.memoryCards.find((card) => {
-        return (!card.faceDown && !card.solved)
-      }));
+      this.checkMatch(
+        clickedCard,
+        this.state.memoryCards.find((card) => {
+          return !card.faceDown && !card.solved;
+        })
+      );
     } else if (currentOpenCards === 2) {
       currentOpenCards = 1;
       this.allCardsDown();
     }
 
-    console.log(newTimer);
-
-    if (newMoves > 0 && newMoves < 8) {
-      if ((newTimer > 0 && newTimer < 35)) {
-        console.log("5 star")
+    if (newMoves > 0 && newMoves < 10) {
+      if (newTimer > 0 && newTimer < 40) {
         newStarRating = 5;
-      } else if ((newTimer > 35 && newTimer < 45)) {
-        console.log("4 star")
+      } else if (newTimer > 40 && newTimer < 45) {
         newStarRating = 4;
-      } else if ((newTimer > 45 && newTimer < 55)) {
-        console.log("3 star")
+      } else if (newTimer > 45 && newTimer < 55) {
         newStarRating = 3;
-      } else if ((newTimer > 55 && newTimer < 65)) {
-        console.log("2 star")
+      } else if (newTimer > 55 && newTimer < 65) {
         newStarRating = 2;
       } else {
-        console.log("1 star")
         newStarRating = 1;
       }
-
-    } else if ((newMoves > 8 && newMoves < 10)) {
-      if ((newTimer > 0 && newTimer < 45)) {
-        console.log("4 star")
+    } else if (newMoves > 10 && newMoves < 12) {
+      if (newTimer > 0 && newTimer < 45) {
         newStarRating = 4;
-      } else if ((newTimer > 45 && newTimer < 55)) {
-        console.log("3 star")
+      } else if (newTimer > 45 && newTimer < 55) {
         newStarRating = 3;
-      } else if ((newTimer > 55 && newTimer < 65)) {
-        console.log("2 star")
+      } else if (newTimer > 55 && newTimer < 65) {
         newStarRating = 2;
       } else {
-        console.log("1 star")
         newStarRating = 1;
       }
-    } else if ((newMoves > 10 && newMoves < 12)) {
-      if ((newTimer > 0 && newTimer < 55)) {
-        console.log("3 star")
+    } else if (newMoves > 10 && newMoves < 12) {
+      if (newTimer > 0 && newTimer < 55) {
         newStarRating = 3;
-      } else if ((newTimer > 55 && newTimer < 65)) {
-        console.log("2 star")
+      } else if (newTimer > 55 && newTimer < 65) {
         newStarRating = 2;
       } else {
-        console.log("1 star")
         newStarRating = 1;
       }
-    } else if ((newMoves > 12 && newMoves < 14)) {
-      if ((newTimer > 0 && newTimer < 65)) {
-        console.log("2 star")
+    } else if (newMoves > 12 && newMoves < 14) {
+      if (newTimer > 0 && newTimer < 65) {
         newStarRating = 2;
       } else {
-        console.log("1 star")
         newStarRating = 1;
       }
     } else if (newMoves > 14) {
@@ -232,23 +203,13 @@ class MemoryGame extends React.Component {
 
     clickedCard.faceDown = false;
 
-    // console.log(
-    //   "Clicked Pair-ID: " + clickedCard.pairId,
-    //   "Clicked ID: " + clickedCard.id,
-    //   "Open Cards: " + currentOpenCards,
-    //   "Timer: " + newTimer,
-    //   "Moves: " + newMoves
-    // )
-
     this.setState({
       openCards: currentOpenCards,
       memoryCards: newMemoryCards,
       moves: newMoves,
       starRating: newStarRating,
-      // timer : newTimer
     });
-
-  }
+  };
 
   shuffleCards = () => {
     let memoryCards = [];
@@ -264,44 +225,43 @@ class MemoryGame extends React.Component {
     }
     memoryCards.sort(() => Math.random() - 0.5);
 
-    console.log('>>>>>> memoryCards', memoryCards);
     return memoryCards;
-  }
+  };
 
   startTimer = () => {
     this.setState({
-      startingTime: Date.now()
-    })
+      startingTime: Date.now(),
+    });
     this.timer = setInterval(() => {
       this.setState({
-        timer: ((Date.now() - this.state.startingTime) / 1000).toFixed(0)
+        timer: ((Date.now() - this.state.startingTime) / 1000).toFixed(0),
       });
-    }, 1000)
+    }, 1000);
     return this.state.timer;
-  }
+  };
 
   stopTimer = () => {
     clearInterval(this.timer);
     console.log("timer stop");
-  }
+  };
 
   checkMatch = (card1, card2) => {
     if (card1.pairId === card2.pairId && card1.id !== card2.id) {
       card1.faceDown = false;
       let newMemoryCards = this.state.memoryCards;
       newMemoryCards.find((card) => {
-        return card.id === card1.id
+        return card.id === card1.id;
       }).solved = true;
       newMemoryCards.find((card) => {
-        return card.id === card2.id
+        return card.id === card2.id;
       }).solved = true;
       this.setState({
         openCards: 0,
-        memoryCards: newMemoryCards
+        memoryCards: newMemoryCards,
       });
       this.checkWin();
     }
-  }
+  };
 
   checkWin() {
     let win = true;
@@ -314,8 +274,8 @@ class MemoryGame extends React.Component {
     if (win) {
       this.stopTimer();
       this.setState({
-        won: true
-      })
+        won: true,
+      });
     }
   }
 
@@ -326,9 +286,9 @@ class MemoryGame extends React.Component {
       if (card.solved) card.faceDown = false;
     });
     this.setState({
-      memoryCards: newMemoryCards
-    })
-  }
+      memoryCards: newMemoryCards,
+    });
+  };
 
   restartGame = () => {
     this.setState({
@@ -338,9 +298,9 @@ class MemoryGame extends React.Component {
       staringTime: 0,
       moves: 0,
       won: false,
-      starRating: 0
+      starRating: 0,
     });
-  }
+  };
 
   componentDidMount() {
     window.addEventListener("resize", this.handleResize);
@@ -353,16 +313,18 @@ class MemoryGame extends React.Component {
   }
 
   handleResize(screenHeight, event) {
-    this.setState({screenHeight: window.innerHeight})
+    this.setState({ screenHeight: window.innerHeight });
   }
 
+  // To convert Expected JSON for the code I've written
 
   constructJson(data) {
     let result = [];
 
     data.map((object, index) => {
-      let question = {}, answer = {};
-      question.id = ((index + 1) * 2) - 1;
+      let question = {},
+        answer = {};
+      question.id = (index + 1) * 2 - 1;
       question.pairId = index + 1;
       question.isQuestion = true;
       question.text = object.question;
@@ -374,50 +336,96 @@ class MemoryGame extends React.Component {
       result.push(answer);
     });
 
-    console.log('>>>>> result', result);
+    console.log(">>>>> result", result);
     return result;
-
-  };
+  }
 
   initialModalClick = () => {
     this.setState({
-      pageLoad: false
+      pageLoad: false,
     });
   };
 
   render() {
     return (
       <Container maxWidth="lg">
-        {this.state.pageLoad ? <GameRuleScreen onClick={this.initialModalClick} /> : null}
-        <Grid container direction="column" justify="flex-start" alignItems="center">
-          <Grid item xs={9} sm={9} md={9} xl={9} container className="gameStats" alignItems="stretch"
-                style={{height: this.state.screenHeight}}>
+        {this.state.pageLoad ? (
+          <GameRuleScreen onClick={this.initialModalClick} />
+        ) : null}
+        <Grid
+          container
+          direction="column"
+          justify="flex-start"
+          alignItems="center"
+        >
+          <Grid
+            item
+            xs={9}
+            sm={9}
+            md={9}
+            xl={9}
+            container
+            className="gameStats"
+            alignItems="stretch"
+            style={{ height: this.state.screenHeight }}
+          >
             {/* <Grid item xs={3}><span className="title">Hello Dev</span></Grid> */}
-            <Grid item xs={12} sm={12} md={4} xl={4} spacing={2} justify="space-evenly">
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={4}
+              xl={4}
+              spacing={2}
+              justify="space-evenly"
+            >
               <Rating
                 style={rating}
                 size="large"
                 name="customized-empty"
                 defaultValue={5}
                 precision={0.5}
-                emptyIcon={<StarBorderIcon fontSize="inherit"/>}
-                readOnly='false'
+                emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                readOnly="false"
                 max={5}
                 value={this.state.starRating}
               />
             </Grid>
-            <Grid item xs={6} sm={6} md={4} xl={4} className="stat" spacing={2}>{this.state.timer}<span
-              className="stat"> Seconds</span></Grid>
-            <Grid item xs={6} sm={6} md={4} xl={4} className="stat" spacing={2}>{this.state.moves}<span
-              className="stat"> Moves</span></Grid>
+            <Grid item xs={6} sm={6} md={4} xl={4} className="stat" spacing={2}>
+              {this.state.timer}
+              <span className="stat"> Seconds</span>
+            </Grid>
+            <Grid item xs={6} sm={6} md={4} xl={4} className="stat" spacing={2}>
+              {this.state.moves}
+              <span className="stat"> Moves</span>
+            </Grid>
           </Grid>
-          <Grid item container className="gameTiles" spacing={2} style={{height: this.state.screenHeight/3}}>
+          <Grid
+            item
+            container
+            className="gameTiles"
+            spacing={2}
+            style={{ height: this.state.screenHeight / 3 }}
+          >
             {this.state.memoryCards.map((card) => {
-              return <MemoryCard key={card.id}  card={card} onClick={(id) => this.handleClick(id)}/>
+              return (
+                <MemoryCard
+                  key={card.id}
+                  card={card}
+                  onClick={(id) => this.handleClick(id)}
+                />
+              );
             })}
           </Grid>
         </Grid>
-        {this.state.won ? <GameOverScreen onClick={this.restartGame} time={this.state.timer} moves={this.state.moves} starRating={this.state.starRating}/> : null}
+        {this.state.won ? (
+          <GameOverScreen
+            onClick={this.restartGame}
+            time={this.state.timer}
+            moves={this.state.moves}
+            starRating={this.state.starRating}
+          />
+        ) : null}
       </Container>
     );
   }
@@ -425,7 +433,14 @@ class MemoryGame extends React.Component {
 
 function MemoryCard(props) {
   return (
-    <Grid className={props.card.solved ? 'hide-card' : null} item xs={3} sm={3} md={3} xl={3}>
+    <Grid
+      className={props.card.solved ? "hide-card" : null}
+      item
+      xs={3}
+      sm={3}
+      md={3}
+      xl={3}
+    >
       <Jello className="Tilt">
         <Flip right spy={props.card.faceDown}>
           <Swing spy={props.card.solved}>
@@ -439,14 +454,18 @@ function MemoryCard(props) {
                 // color= {props.card.color}
                 className="memoryImg"
                 question={props.card.isQuestion}
-                text={props.card.faceDown ?
-                  <CardMedia
-                    image={bgImg}
-                    className="memoryImg"
-                  />
-                  :
-                  props.card.text}
-                handleClick={props.card.solved || !props.card.faceDown ? null : () => props.onClick(props.card.id)}
+                text={
+                  props.card.faceDown ? (
+                    <CardMedia image={bgImg} className="memoryImg" />
+                  ) : (
+                    props.card.text
+                  )
+                }
+                handleClick={
+                  props.card.solved || !props.card.faceDown
+                    ? null
+                    : () => props.onClick(props.card.id)
+                }
               />
             </Card>
           </Swing>
@@ -466,25 +485,35 @@ function GameOverScreen(props) {
               <Card style={cardStyle} className="message">
                 <CardContent>
                   <Grid container alignItems="center" justify="center">
-                    <Grid item xs={12} className="title">You Win</Grid>
-                    <Grid item xs={6} className="title">{props.time} <span className="stat"> seconds</span></Grid>
-                    <Grid item xs={6} className="title">{props.moves} <span className="stat"> moves</span></Grid>
-                    <Grid item xs={6}  alignItems="center" >
+                    <Grid item xs={12} className="title">
+                      You Win
+                    </Grid>
+                    <Grid item xs={6} className="title">
+                      {props.time} <span className="stat"> seconds</span>
+                    </Grid>
+                    <Grid item xs={6} className="title">
+                      {props.moves} <span className="stat"> moves</span>
+                    </Grid>
+                    <Grid item xs={6} alignItems="center">
                       <Rating
-                       className="ratingStyle"
+                        className="ratingStyle"
                         size="large"
                         name="customized-empty"
                         defaultValue={5}
                         precision={0.5}
-                        emptyIcon={<StarBorderIcon fontSize="inherit"/>}
-                        readOnly='false'
+                        emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                        readOnly="false"
                         max={5}
                         value={props.starRating}
                       />
                     </Grid>
                     <Grid item xs={10}>
                       {/* <HeadShake > */}
-                      <Card style={cardStyle} className="restartBtn title" onClick={props.onClick}>
+                      <Card
+                        style={cardStyle}
+                        className="restartBtn title"
+                        onClick={props.onClick}
+                      >
                         Play Again?
                       </Card>
                       {/* </HeadShake> */}
@@ -510,13 +539,25 @@ function GameRuleScreen(props) {
               <Card style={cardStyle} className="message">
                 <CardContent>
                   <Grid container alignItems="center" justify="center">
-                    <Grid item xs={12} className="rules"> All Question's are <span style={{color:'red'}} > Red </span> in Color <br/> Answers are <span style={{color:'Green'}} > Green </span> in color! <br/>
-                      All the Best !!! <br/><br/></Grid>
+                    <Grid item xs={12} className="rules">
+                      {" "}
+                      All Question's are{" "}
+                      <span style={{ color: "red" }}> Red </span> in Color{" "}
+                      <br /> Answers are{" "}
+                      <span style={{ color: "Green" }}> Green </span> in color!{" "}
+                      <br />
+                      All the Best !!! <br />
+                      <br />
+                    </Grid>
                     <Grid item xs={10}>
                       <Flash>
-                      <Card style={cardStyle} className="restartBtn title" onClick={props.onClick}>
-                        Play Game
-                      </Card>
+                        <Card
+                          style={cardStyle}
+                          className="restartBtn title"
+                          onClick={props.onClick}
+                        >
+                          Play Game
+                        </Card>
                       </Flash>
                     </Grid>
                   </Grid>
@@ -530,8 +571,4 @@ function GameRuleScreen(props) {
   );
 }
 
-
-ReactDOM.render(
-  <MemoryGame/>,
-  document.getElementById('root')
-);
+ReactDOM.render(<MemoryGame />, document.getElementById("root"));
