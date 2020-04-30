@@ -24,7 +24,7 @@ import Container from '@material-ui/core/Container';
 // import { memoryImages } from './images';
 import bgImg from './images/logo.jpg';
 
-import './index.css';
+import './index.scss';
 import CardComponent from "./CardComponent";
 //import { colors } from '@material-ui/core';
 // import { colors } from '@material-ui/core';
@@ -137,14 +137,15 @@ class MemoryGame extends React.Component {
     super(props);
     this.state = {
       openCards: 0,
-      memoryCards: this.shuffleCards(),
+      memoryCards: this.shuffleCards(this.constructJson(props.questions)),
       screenHeight: window.innerHeight,
       timer: 0,
       staringTime: 0,
       moves: 0,
       won: false,
       starRating: 0,
-      pageLoad: true
+      pageLoad: true,
+      onFinish: props.onFinish,
     };
     this.handleResize = this.handleResize.bind(this);
   }
@@ -250,10 +251,10 @@ class MemoryGame extends React.Component {
 
   }
 
-  shuffleCards = () => {
+  shuffleCards = (staticQuestions) => {
     let memoryCards = [];
-    for (let i = 0; i < staticContent.length; i++) {
-      const staticContentElement = staticContent[i];
+    for (let i = 0; i < staticQuestions.length; i++) {
+      const staticContentElement = staticQuestions[i];
       memoryCards[i] = {
         ...staticContentElement,
         id: staticContentElement.id,
@@ -417,7 +418,7 @@ class MemoryGame extends React.Component {
             })}
           </Grid>
         </Grid>
-        {this.state.won ? <GameOverScreen onClick={this.restartGame} time={this.state.timer} moves={this.state.moves} starRating={this.state.starRating}/> : null}
+        {this.state.won ? <GameOverScreen onClick={this.state.onFinish} time={this.state.timer} moves={this.state.moves} starRating={this.state.starRating}/> : null}
       </Container>
     );
   }
@@ -485,7 +486,7 @@ function GameOverScreen(props) {
                     <Grid item xs={10}>
                       {/* <HeadShake > */}
                       <Card style={cardStyle} className="restartBtn title" onClick={props.onClick}>
-                        Play Again?
+                        Quit
                       </Card>
                       {/* </HeadShake> */}
                     </Grid>
@@ -530,8 +531,4 @@ function GameRuleScreen(props) {
   );
 }
 
-
-ReactDOM.render(
-  <MemoryGame/>,
-  document.getElementById('root')
-);
+export default MemoryGame;
